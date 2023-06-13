@@ -15,6 +15,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import PaperImg from "/paper.png";
 import { TextureLoader } from "three";
+import steelPic from "../assets/steel.jpg";
 
 export const Boards = () => {
   const theme = useTheme();
@@ -26,17 +27,18 @@ export const Boards = () => {
   const aiBoardData = useSelector(boardsSelectors.aiBoardData);
   const aiShips = useSelector(boardsSelectors.aiShips);
 
-  
   const [bulletPlayerFired, setBulletPlayerFired] = useState(false);
   const [bulletAiFired, setBulletAiFired] = useState(false);
-  
+
   const bulletRefPlayer = useRef();
   const bulletRefAi = useRef();
-  
+
   const shipToFill = useSelector(boardsSelectors.shipToFill);
-  
+
   const gameStatus = useSelector(boardsSelectors.gameStatus);
-  const isSecondAnimation = gameStatus === gameStatuses.playerSecondAnimation ||  gameStatus ===gameStatuses.aiSecondAnimation
+  const isSecondAnimation =
+    gameStatus === gameStatuses.playerSecondAnimation ||
+    gameStatus === gameStatuses.aiSecondAnimation;
 
   const points = useSelector(boardsSelectors.getPoints);
 
@@ -52,26 +54,26 @@ export const Boards = () => {
     if (gameStatus === gameStatuses.playerTurn) {
       dispatch(informationsActions.setTitle(titles.playerTurn));
     }
-    if (
-   gameStatus === gameStatuses.aiAnimation
-    ) {
+    if (gameStatus === gameStatuses.aiAnimation) {
       dispatch(informationsActions.setTitle(titles.aiTurn));
       dispatch(boardsActions.aiHit({}));
     }
-  }, [
-gameStatus
-  ]);
+  }, [gameStatus]);
 
   useEffect(() => {
-
-
-    if (gameStatus === gameStatuses.playerAnimation || gameStatus ===  gameStatuses.aiSecondAnimation) {
-      console.log('start', gameStatus)
+    if (
+      gameStatus === gameStatuses.playerAnimation ||
+      gameStatus === gameStatuses.aiSecondAnimation
+    ) {
+      console.log("start", gameStatus);
 
       fireBullet(bulletRefPlayer, bulletPlayerFired, setBulletPlayerFired);
     }
-    if (gameStatus === gameStatuses.aiAnimation || gameStatus ===  gameStatuses.playerSecondAnimation) {
-      console.log('start', gameStatus)
+    if (
+      gameStatus === gameStatuses.aiAnimation ||
+      gameStatus === gameStatuses.playerSecondAnimation
+    ) {
+      console.log("start", gameStatus);
 
       fireBullet(bulletRefAi, bulletAiFired, setBulletAiFired);
     }
@@ -99,10 +101,8 @@ gameStatus
       setSwitchLabel(directions.column);
     }
   };
-  
-  const flameTexture = new TextureLoader().load(
-    "../../../public/steel.jpg"
-  );
+
+  const flameTexture = new TextureLoader().load(steelPic);
 
   return (
     <Box
@@ -135,7 +135,7 @@ gameStatus
           bulletFired={bulletPlayerFired}
           setBulletFired={setBulletPlayerFired}
           fireBullet={fireBullet}
-          isSecondAnimation ={isSecondAnimation}
+          isSecondAnimation={isSecondAnimation}
           flameTexture={flameTexture}
         />
       </Box>
@@ -155,9 +155,8 @@ gameStatus
           bulletFired={bulletAiFired}
           setBulletFired={setBulletAiFired}
           fireBullet={fireBullet}
-          isSecondAnimation ={isSecondAnimation}
+          isSecondAnimation={isSecondAnimation}
           flameTexture={flameTexture}
-
         />
       </Box>
 
@@ -168,19 +167,25 @@ gameStatus
           backgroundImage: `url(${PaperImg})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          padding:"30px",
+          padding: "30px",
           border: "3px solid #D2B48C",
-          borderRadius: "10px"
+          borderRadius: "10px",
         }}
       >
         <FormControlLabel
           control={<Switch checked={checked} onChange={handleChange} />}
           label={switchLabel}
-          disabled={ shipToFill ? false : true}
+          disabled={shipToFill ? false : true}
         />
-        <Typography variant="h5"> Player Points: {points.playerPionts} </Typography>
+        <Typography variant="h5">
+          {" "}
+          Player Points: {points.playerPionts}{" "}
+        </Typography>
         <Typography variant="h5"> Ai Points: {points.aiPoints} </Typography>
-        <Typography variant="h5"> Points to win: {points.maxPoints} </Typography>
+        <Typography variant="h5">
+          {" "}
+          Points to win: {points.maxPoints}{" "}
+        </Typography>
       </FormGroup>
     </Box>
   );

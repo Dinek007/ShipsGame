@@ -7,29 +7,33 @@ import * as THREE from 'three'
 import React, { useRef } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+import steelPic from "../assets/steel.jpg";
 
 type GLTFResult = GLTF & {
   nodes: {
-    mesh_0: THREE.Mesh
-  }
+    mesh_0: THREE.Mesh;
+  };
   materials: {
     material_0: THREE.MeshStandardMaterial; // Add the material declaration
   };
-}
+};
 
-export function Model(props: JSX.IntrinsicElements['group']) {  
+export function Model(props: JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("/ship/ship.gltf") as GLTFResult;
 
-  const { nodes, materials } = useGLTF('/ship/ship.gltf') as GLTFResult
-
-  const texture = useTexture('../../../public/steel.jpg');
+  const texture = useTexture(steelPic);
 
   materials.material_0 = new THREE.MeshStandardMaterial({ map: texture });
 
   return (
     <group {...props} dispose={null}>
-      <mesh scale={1} geometry={nodes.mesh_0.geometry} material={materials.material_0} />
+      <mesh
+        scale={1}
+        geometry={nodes.mesh_0.geometry}
+        material={materials.material_0}
+      />
     </group>
-  )
+  );
 }
 
 useGLTF.preload('/ship/ship.gltf')
