@@ -1,0 +1,11 @@
+Model Information:
+* title:	Orbital Disruption
+* source:	https://sketchfab.com/3d-models/orbital-disruption-e34ec5c6910845f58de1f3ee94584b40
+* author:	Chaitanya Krishnan (https://sketchfab.com/chaitanyak)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Orbital Disruption" (https://sketchfab.com/3d-models/orbital-disruption-e34ec5c6910845f58de1f3ee94584b40) by Chaitanya Krishnan (https://sketchfab.com/chaitanyak) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
